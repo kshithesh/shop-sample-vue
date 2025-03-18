@@ -3,7 +3,7 @@
     <div class="leftMenu" @click="emits('go-home')"><h3>Shopping</h3></div>
     <div class="centerMenu">
       <div v-for="category in categories" :key="category">
-        <span
+        <span :class="currentCategory == category ? 'currentCat': ''"
           @click="
             emits('filter-changed', {
               category: category,
@@ -47,6 +47,9 @@ const props = defineProps({
   },
   basketCount: {
     type: Number,
+  },
+  currentCategory: {
+    type: Number,
   }
 });
 </script>
@@ -67,5 +70,11 @@ const props = defineProps({
 .rightMenu {
   position: relative;
   display: inline-block;
+}
+
+.currentCat {
+  border: solid 1px;
+  padding: 5px;
+  border-radius: 5px;
 }
 </style>

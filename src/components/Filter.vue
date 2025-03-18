@@ -21,7 +21,6 @@ const sortFilter = ref('');
 
 watch([categoryFilter, searchQuery, sortFilter], () => {
   emit('filter-changed', {
-    category: "",
     search: searchQuery.value,
     sort: sortFilter.value
   });

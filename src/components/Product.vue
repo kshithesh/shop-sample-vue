@@ -30,6 +30,7 @@ const emit = defineEmits(["add-to-basket", "openModal"]);
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 img {
   max-width: 100%;

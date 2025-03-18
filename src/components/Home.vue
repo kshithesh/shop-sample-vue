@@ -4,6 +4,7 @@
       class="appBanner"
       :categories="categoriesList"
       :basketCount="basketCount"
+      :currentCategory="currentCat"
       @filter-changed="handleFilterChange"
       @go-home="
         (filters = {
@@ -62,6 +63,7 @@ import Cart from "./Cart.vue";
 const store = useStore();
 const openCart = ref(false);
 const basketCount = ref(0);
+const currentCat = ref('All');
 const productList = ref([]);
 const productListTemp = ref([]);
 const categoriesList = ref([]);
@@ -75,6 +77,7 @@ onMounted(() => {
 });
 const filteredProducts = computed(() => {
   if (filters.value.category) {
+    currentCat.value = filters.value.category;
     productListTemp.value = JSON.parse(JSON.stringify(productList.value)).filter(
       (product) =>
         product.category === filters.value.category ||
@@ -82,8 +85,15 @@ const filteredProducts = computed(() => {
     );
   }
   if (filters.value.search) {
-    productListTemp.value = productListTemp.value.filter((product) =>
+    productListTemp.value = JSON.parse(JSON.stringify(productList.value)).filter((product) =>
       product.title.toLowerCase().includes(filters.value.search.toLowerCase())
+    );
+  }
+  if(filters.value.category && filters.value.search){
+    productListTemp.value = JSON.parse(JSON.stringify(productList.value)).filter(
+      (product) =>
+        (product.category === filters.value.category && product.title.toLowerCase().includes(filters.value.search.toLowerCase())) ||
+        filters.value.category == "All"
     );
   }
   if (filters.value.sort) {
@@ -111,7 +121,9 @@ const fetchProducts = async () => {
   ];
 };
 const handleFilterChange = (newFilters) => {
-  filters.value = newFilters;
+  if(newFilters["search"]) filters.value["search"] = newFilters["search"];
+  if(newFilters["sort"]) filters.value["sort"] = newFilters["sort"];
+  if(newFilters["category"]) filters.value["category"] = newFilters["category"];
   openCart.value = false;
 };
 
