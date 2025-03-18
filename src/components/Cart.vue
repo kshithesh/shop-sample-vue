@@ -62,7 +62,7 @@ const removeFromBasket = (productId) => {
 const updateQuantity = (productId, quantity) => {
   store.commit("basket/updateQuantity", {
     productId,
-    quantity: parseInt(quantity),
+    quantity: parseInt(quantity) > 0 ? parseInt(quantity) : 1,
   });
 };
 

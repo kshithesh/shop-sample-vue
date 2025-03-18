@@ -13,7 +13,8 @@
           sort: '',
         }),
           (openCart = false),
-          (productListTemp = productList)
+          (productListTemp = productList),
+          (currentCat = 'All')
       "
       @open-cart="openCart = true"
     />
@@ -39,7 +40,8 @@
           }),
             (openCart = false),
             (basketCount = 0),
-            (productListTemp = productList)
+            (productListTemp = productList),
+            (currentCat = 'All')
         "
       />
     </div>
