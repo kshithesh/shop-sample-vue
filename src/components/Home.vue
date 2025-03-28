@@ -85,11 +85,16 @@ const filteredProducts = computed(() => {
         product.category === filters.value.category ||
         filters.value.category == "All"
     );
+  } else {
+    currentCat.value = "All";
+    productListTemp.value = JSON.parse(JSON.stringify(productList.value));
   }
   if (filters.value.search) {
     productListTemp.value = JSON.parse(JSON.stringify(productList.value)).filter((product) =>
       product.title.toLowerCase().includes(filters.value.search.toLowerCase())
     );
+  } else {
+    productListTemp.value = JSON.parse(JSON.stringify(productList.value));
   }
   if(filters.value.category && filters.value.search){
     productListTemp.value = JSON.parse(JSON.stringify(productList.value)).filter(
@@ -123,9 +128,9 @@ const fetchProducts = async () => {
   ];
 };
 const handleFilterChange = (newFilters) => {
-  if(newFilters["search"]) filters.value["search"] = newFilters["search"];
-  if(newFilters["sort"]) filters.value["sort"] = newFilters["sort"];
-  if(newFilters["category"]) filters.value["category"] = newFilters["category"];
+  newFilters["search"] ? filters.value["search"] = newFilters["search"] : filters.value["search"] = ""
+  newFilters["sort"] ? filters.value["sort"] = newFilters["sort"] : filters.value["sort"] = ""
+  newFilters["category"] ? filters.value["category"] = newFilters["category"] : filters.value["category"] = ""
   openCart.value = false;
 };
 

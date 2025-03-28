@@ -44,7 +44,7 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { computed, defineEmits } from "vue";
+import { computed } from "vue";
 
 const store = useStore();
 const emit = defineEmits(["go-home"]);

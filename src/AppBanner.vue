@@ -35,11 +35,6 @@
   </div>
 </template>
 <script setup>
-import { ref, defineProps, onMounted } from "vue";
-import Cart from "./components/Cart.vue";
-import { useStore } from "vuex";
-
-const store = useStore();
 const emits = defineEmits(["open-cart", "filter-changed", "go-home"]);
 const props = defineProps({
   categories: {
